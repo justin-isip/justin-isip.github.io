@@ -23,5 +23,23 @@
 <iframe src="assets/cv.pdf" width="100%" height="900"></iframe>
 </main>
 </div>
+  <script>
+  const saved = localStorage.getItem("theme");
+  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initial = saved || (systemDark ? "dark" : "light");
+  document.documentElement.dataset.theme = initial;
+
+  const btn = document.getElementById("themeToggle");
+  if (btn) {
+    btn.textContent = (initial === "dark") ? "Light mode" : "Dark mode";
+    btn.addEventListener("click", () => {
+      const current = document.documentElement.dataset.theme || "light";
+      const next = (current === "dark") ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem("theme", next);
+      btn.textContent = (next === "dark") ? "Light mode" : "Dark mode";
+    });
+  }
+</script>
 </body>
 </html>
